@@ -1,0 +1,17 @@
+<h1 id="set-zone-info">Set Zone Info</h1>
+<h2 id="find-timezone">Find Timezone</h2>
+<p>You can list all timezones with this command.</p>
+<pre><code class="lang-sh"><span class="hljs-keyword">find</span> <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/zoneinfo/</span>
+</code></pre>
+<h2 id="set-timezone">Set Timezone</h2>
+<p>This sets your timezone. This is an example for Chicago.</p>
+<pre><code class="lang-sh">ln -sf <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/zoneinfo/</span>America<span class="hljs-regexp">/Chicago /</span>etc<span class="hljs-regexp">/localtime</span>
+</code></pre>
+<h1 id="set-hardware-clock">Set Hardware Clock</h1>
+<p>This will synchronize your hardware clock.</p>
+<pre><code class="lang-sh">hwclock <span class="hljs-comment">--systohc</span>
+</code></pre>
+<h1 id="enable-ntp-sync">Enable NTP Sync</h1>
+<p>This is completely optional, but it can fix common SSL handshake errors.</p>
+<pre><code class="lang-sh"><span class="hljs-attribute">timedatectl status</span>
+</code></pre>

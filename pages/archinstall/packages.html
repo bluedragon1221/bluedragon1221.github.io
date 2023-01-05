@@ -1,0 +1,8 @@
+<p>The base of Arch Linux is installed using the <code>pacstrap</code> command. This will take a long time depending on your internet connection, so your should probably <a href=./mirrors.html>Update your mirrors</a> first.</p>
+<h2>Update <code>archlinux-keyring</code></h2>
+<p>Depending on how outdated your Arch Linux ISO is, you may need to force update the <code>archlinux-keyring</code> before you <code>pacstrap</code>.</p>
+<pre><code>pacman -Sy archlinux-keyring</code></pre>
+<h2>Run <code>pacstrap</code></h2>
+<pre><code>pacstrap /mnt base linux linux-firmware</code></pre>
+<p>You can add any other packages to this command. I generally add my text editor of choice, networking tools, and grub as well.</p>
+<pre><code>pacstrap /mnt base linux linux-firmware vim zsh networkmanager</code></pre>

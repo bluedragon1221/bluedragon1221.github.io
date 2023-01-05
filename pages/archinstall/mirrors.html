@@ -1,0 +1,13 @@
+<h1>Update Mirrors</h1>
+<p>In Arch Linux, mirrors are not automatically changed based on your location. Instead, Arch users use <a href="https://wiki.archlinux.org/title/Reflector"><code>reflector</code></a> to update mirrors.</p>
+<h2>Backup</h2>
+<p>Make a backup of the <code>mirrorlist</code> file before doing this, as it will overwrite the current one.</p>
+<pre><code>cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+</code></pre>
+<h2>Run <code>reflector</code></h2>
+<pre><code>reflector --protocol https \
+--latest 10 \
+--sort rate \
+--save /etc/pacman.d/mirrorlist
+</code></pre>
+

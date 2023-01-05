@@ -1,0 +1,23 @@
+<p>Assuming you don't want to use the root account the whole time, here's how you create a user in Linux.</p>
+<h1>Setup <code>sudo</code></h1>
+<p><code>sudo</code> does not come by default on our arch installation. We need to install it and change it&#39;s configuration.</p>
+<pre><code>pacman -S sudo</code></pre>
+<p>Edit the <code>sudoers</code> file with this command,</p>
+<pre><code>EDITOR=vim visudo</code></pre>
+<p>then uncomment the line that says <code>:wheel ALL=(ALL) ALL</code>.</p>
+<h1>...or <code>doas</code></h1>
+<p><a href="https://wiki.archlinux.org/title/Doas"><code>opendoas</code></a> is the replacement for <code>sudo</code> used on openbsd. It's <a href="https://www.youtube.com/watch?v=brXd12LstgA">more lightweight and more secure</a> than <code>sudo</code>. Here's how you install it.</p>
+<pre><code>pacman -S doas</code></pre>
+<p>Allow all users in wheel group to execute commands.</p>
+<pre><code>### /etc/doas.conf ###
+
+permit persist :wheel
+</code></pre>
+<h1 id="create-user">Create User</h1>
+<p>Run this command to create a user.</p>
+<pre><code>useradd -mG wheel -s /bin/zsh USERNAME</code></pre>
+<p>Long-form:</p>
+<pre><code>useradd --create-home --gid wheel --shell /bin/zsh USERNAME</code></pre>
+<h1>Set User Password</h1>
+<pre><code>passwd USERNAME</code></pre>
+
