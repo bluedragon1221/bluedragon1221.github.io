@@ -1,22 +1,30 @@
-<h1>Installation</h1>
-<p>Install <code>iwctl</code> or <code>networkmanager</code> with your distro's package manager.</p>
-<h1>Usage</h1>
-<h2><code>iwctl</code></h2>
-<h3>Find SSID</h3>
-<p>Find the name of your network. If you already know this, skip this step.</p>
-<pre><code>iwctl station wlan0 get-networks
-</code></pre>
-<h3>Connect to the Network</h3>
-<pre><code>iwctl station wlan0 connect [SSID]</code></pre>
-<h3>Password</h3>
-<p>If your network has a password, it will prompt for it.</p>
-<h2><code>nmcli</code></h2>
-<h3>Find SSID</h3>
-<p>Find the name of your network. If you already know this, skip this step.</p>
-<pre><code>nmcli device wifi
-</code></pre>
-<h3>Connect to the Network</h3>
-<pre><code>nmcli device wifi connect [SSID]</code></pre>
-<h3>Password</h3>
-<p>If your network has a password, tell it to prompt for the password.</p>
-<pre><code>nmcli --ask dev wifi connect [SSID]</code></pre>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../../css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Connect to Wifi</h1>
+        <p>Install <code>iwctl</code> or <code>networkmanager</code> with your distro's package manager.</p>
+        <h2>Using iwctl</h2>
+        <h3>Find SSID</h3>
+        <p>Find the name of your network. If you already know this, skip this step.</p>
+        <pre><code>iwctl station wlan0 get-networks</code></pre>
+        <h3>Connect to the Network</h3>
+        <pre><code>iwctl station wlan0 connect [SSID]</code></pre>
+        <h3>Password</h3>
+        <p>If your network has a password, it will prompt for it.</p>
+        <h2>Using nmcli</h2>
+        <h3>Find SSID</h3>
+        <p>Find the name of your network. If you already know this, skip this step.</p>
+        <pre><code>nmcli device wifi</code></pre>
+        <h3>Connect to the Network</h3>
+        <pre><code>nmcli device wifi connect [SSID]</code></pre>
+        <h3>Password</h3>
+        <p>If your network has a password, tell it to prompt for the password.</p>
+        <pre><code>nmcli --ask dev wifi connect [SSID]</code></pre>
+    </body>
+</html>

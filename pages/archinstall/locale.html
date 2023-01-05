@@ -1,8 +1,17 @@
-<h1 id="set-locale">Set Locale</h1>
-<h2><code>Locale-gen</code></h2>
-<p>If this part is a bit confusing, here's a video that explains it. <a href="https://youtu.be/68z11VAYMS8?t=711">link</a></p>
-<p>Edit <code>/etc/locale.gen</code>, uncomment <code>en_US.UTF-8 UTF-8</code>.</p>
-<pre><code>... 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../../css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Set Locale</h1>
+        <h2>Locale-gen</h2>
+        <p>If this part is a bit confusing, here's a video that explains it. <a href="https://youtu.be/68z11VAYMS8?t=711">link</a></p>
+        <p>Edit <code>/etc/locale.gen</code>, uncomment <code>en_US.UTF-8 UTF-8</code>.</p>
+        <pre><code>... 
 #en_SC.UTF-8 UTF-8  
 #en_SG.UTF-8 UTF-8  
 #en_SG ISO-8859-1
@@ -10,12 +19,14 @@ en_US.UTF-8 UTF-8
 #en_US ISO-8859-1  
 #en_ZA.UTF-8 UTF-8  
 #en_ZA ISO-8859-1 
-...
-</code></pre>
-<p>Generate the locales by running: </p>
-<pre><code class="lang-sh">locale-gen</code></pre>
-<h2><code>Locale.conf</code></h2>
-<p>Create <code>/etc/locale.conf</code> with the following information:</p>
-<pre><code>### /etc/locale.conf ###
-LANG=en_US.UTF-8
-</code></pre>
+...</code></pre>
+        <p>Generate the locales by running: </p>
+        <pre><code>locale-gen</code></pre>
+        <h2>Locale.conf</h2>
+        <p>Create <code>/etc/locale.conf</code> with the following information:</p>
+        <pre><code>### /etc/locale.conf ###
+
+LANG=en_US.UTF-8</code></pre>
+    </body>
+</html>
+

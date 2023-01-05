@@ -1,44 +1,56 @@
-<p>Before doing this, make sure your system uses EFI. You can check by finding the <code>efivars</code> folder.</p>
-<pre><code>[[ -d /sys/firmware/efi/efivars ]] &amp;&amp; echo "EFI" || echo "BIOS"</code></pre>
-<p>If it returns <code>BIOS</code>, avoid the <code>EFI</code> sections of this guide.</p>
-<h2>Find the Right Drive</h2>
-<p>Sometimes <code>/dev/sda</code> is not the drive you want to install to. On virtual machines it can be <code>/dev/vda</code>, and on newer systems it can be <code>/dev/nvme0n1</code>. To make sure you use the right drive, check with <code>lsblk</code>.</p>
-<h1>Partitioning</h1>
-<p>Now we will make the actual partitions. If you are uncomfortable with using <code>parted</code>, you can use <code>cfdisk</code> in the same way.</p>
-<h3>EFI</h3>
-<p>Create a new GPT partition table (this will wipe your drive).</p>
-<pre><code>parted /dev/sda -- mklabel gpt</code></pre>
-<p>Add the root partition. This will fill the whole disk, besides the end part (swap space), and the 512MB in front (boot partition).</p>
-<pre><code>parted /dev/sda -- mkpart primary 512MB -8GB</code></pre>
-<p>Next, add a swap partition. The size required will vary according to needs. Here, we create an 8GB swap.</p>
-<pre><code>parted /dev/sda -- mkpart primary linux-swap -8GB 100%</code></pre>
-<p>Finally, the boot partition. It uses the reserved 512MB at the start of the disk.</p>
-<pre><code>parted /dev/sda -- mkpart ESP fat32 1MB 512MB</code></pre>
-<h2>BIOS</h2>
-<p>Create a new MBR partition table (this will wipe your drive).</p>
-<pre><code>parted /dev/sda -- mklabel msdos</code></pre>
-<p>Add the root partition. This will fill the whole disk, besides the end part (swap space), and the 512MB in front (boot partition).</p>
-<pre><code>parted /dev/sda -- mkpart primary 512MB -8GB</code></pre>
-<p>Allow the root partition to boot.</p>
-<pre><code>parted /dev/sda -- set 1 boot on</code></pre>
-<p>Next, add a swap partition. The size required will vary according to needs. Here, we create an 8GB swap.</p>
-<pre><code>parted /dev/sda -- mkpart primary linux-swap -8GB 100%</code></pre>
-<h1>Formatting</h1>
-<p>For creating ext4 partitions, use <code>mkfs.ext4</code>. <code>-L</code> labels the partition.</p>
-<pre><code>mkfs.ext4 -L root /dev/sda1</code></pre>
-<p>For creating swap partitions, use <code>mkswap</code>. Assign the label with <code>-L</code>.</p>
-<pre><code>mkswap -L swap /dev/sda2</code></pre>
-<h2>EFI</h2>
-<p>For creating boot partitions, use <code>mkfs.fat</code>. Assign a label to the boot partition with <code>-n</code>. </p>
-<pre><code>mkfs.fat -F 32 -n boot /dev/sda3</code></pre>
-<h2>Why Labels?</h2>
-<p>I recommend assigning a unique symbolic label to each partition. This makes it easier to reference each partition when mounting and in other situations.</p>
-<h1>Mounting</h1>
-<p>Mount the root partition to <code>/mnt</code> using the label we made earlier.</p>
-<pre><code>mount /dev/disk/by-label/root /mnt</code></pre>
-<p>Enable the swap partition.</p>
-<pre><code>swapon /dev/disk/by-label/swap</code></pre>
-<h2>EFI</h2>
-<p>Mount the EFI Boot partition to <code>/mnt/boot/efi</code>. You can either create this directory using <code>mkdir</code>, or use the <code>--mkdir</code> flag like so:</p>
-<pre><code>mount --mkdir /dev/disk/by-label/boot /mnt/boot/efi</code></pre>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../../css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Create Filesystem</h1>
+        <p>Before doing this, make sure your system uses EFI. You can check by finding the <code>efivars</code> folder.</p>
+        <pre><code>[[ -d /sys/firmware/efi/efivars ]] &amp;&amp; echo "EFI" || echo "BIOS"</code></pre>
+        <p>If it returns <code>BIOS</code>, avoid the <code>EFI</code> sections of this guide.</p>
+        <h2>Find the Right Drive</h2>
+        <p>Sometimes <code>/dev/sda</code> is not the drive you want to install to. On virtual machines it can be <code>/dev/vda</code>, and on newer systems it can be <code>/dev/nvme0n1</code>. To make sure you use the right drive, check with <code>lsblk</code>.</p>
+        <h2>Partitioning</h2>
+        <p>Now we will make the actual partitions. If you are uncomfortable with using <code>parted</code>, you can use <code>cfdisk</code> in the same way.</p>
+        <h3>EFI</h3>
+        <p>Create a new GPT partition table (this will wipe your drive).</p>
+        <pre><code>parted /dev/sda -- mklabel gpt</code></pre>
+        <p>Add the root partition. This will fill the whole disk, besides the end part (swap space), and the 512MB in front (boot partition).</p>
+        <pre><code>parted /dev/sda -- mkpart primary 512MB -8GB</code></pre>
+        <p>Next, add a swap partition. The size required will vary according to needs. Here, we create an 8GB swap.</p>
+        <pre><code>parted /dev/sda -- mkpart primary linux-swap -8GB 100%</code></pre>
+        <p>Finally, the boot partition. It uses the reserved 512MB at the start of the disk.</p>
+        <pre><code>parted /dev/sda -- mkpart ESP fat32 1MB 512MB</code></pre>
+        <h3>BIOS</h3>
+        <p>Create a new MBR partition table (this will wipe your drive).</p>
+        <pre><code>parted /dev/sda -- mklabel msdos</code></pre>
+        <p>Add the root partition. This will fill the whole disk, besides the end part (swap space), and the 512MB in front (boot partition).</p>
+        <pre><code>parted /dev/sda -- mkpart primary 512MB -8GB</code></pre>
+        <p>Allow the root partition to boot.</p>
+        <pre><code>parted /dev/sda -- set 1 boot on</code></pre>
+        <p>Next, add a swap partition. The size required will vary according to needs. Here, we create an 8GB swap.</p>
+        <pre><code>parted /dev/sda -- mkpart primary linux-swap -8GB 100%</code></pre>
+        <h2>Formatting</h2>
+        <p>For creating ext4 partitions, use <code>mkfs.ext4</code>. <code>-L</code> labels the partition.</p>
+        <pre><code>mkfs.ext4 -L root /dev/sda1</code></pre>
+        <p>For creating swap partitions, use <code>mkswap</code>. Assign the label with <code>-L</code>.</p>
+        <pre><code>mkswap -L swap /dev/sda2</code></pre>
+        <h3>EFI</h3>
+        <p>For creating boot partitions, use <code>mkfs.fat</code>. Assign a label to the boot partition with <code>-n</code>. </p>
+        <pre><code>mkfs.fat -F 32 -n boot /dev/sda3</code></pre>
+        <h2>Why Labels?</h2>
+        <p>I recommend assigning a unique symbolic label to each partition. This makes it easier to reference each partition when mounting and in other situations.</p>
+        <h1>Mounting</h1>
+        <p>Mount the root partition to <code>/mnt</code> using the label we made earlier.</p>
+        <pre><code>mount /dev/disk/by-label/root /mnt</code></pre>
+        <p>Enable the swap partition.</p>
+        <pre><code>swapon /dev/disk/by-label/swap</code></pre>
+        <h2>EFI</h2>
+        <p>Mount the EFI Boot partition to <code>/mnt/boot/efi</code>. You can either create this directory using <code>mkdir</code>, or use the <code>--mkdir</code> flag like so:</p>
+        <pre><code>mount --mkdir /dev/disk/by-label/boot /mnt/boot/efi</code></pre>
+    </body>
+</html>
 
