@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <a href="index.html">⇐ back</a>
+    <h1>Aliases</h1>
+    <p>Aliases are awesome! They allow you to shorten any any command that you type frequently. I talk about aliases a lot, so I won't go into any specific usecases.</p>
+
+    <h2>Create an Alias File</h2>
+    <p>I have so many aliases that I keep them in a separate file and source that file.</p>
+    
+    <p>create the file,</p>
+    <pre><code>touch ~/.config/zsh/aliasrc</code></pre>
+    
+    <p>and source the file in your <code>~/.zshrc</code>.</p>
+    <pre><code>### ~/.zshrc
+source ~/.config/zsh/aliasrc</code></pre>
+
+    <h2>My Alias file</h2>
+    <p><a href="aliasrc">This is my aliasrc.</a> You can use it for insiration in your own aliasrc.</p>
+
+    <h3>Remotely Add Aliases</h3>
+    <p>I have a bash function that will remotely add an alias to my aliasrc.</p>
+    <pre><code>add_alias() {
+echo $1 >> ~/.config/zsh/aliasrc
+}</code></pre>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../../css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <a href="index.html">⇐ back</a>
+        <h1>ZSH Prompt</h1>
+        <p><code>zsh</code> completely fixes the bash <code>PS1</code> variable with prompt expansions. Since the default zsh prompt kind of sucks, lets make it better.</p>
+
+        <p>For a more default-looking prompt, try this in your <code>~/.zshrc</code>. This will show the current working directory, then a <code>%</code>.</p>
+        <pre><code>### ~/.zshrc ###
+PROMPT="%~ %% "</code></pre>
+        <p>Using more prompt expansions, this is my <code>zsh</code> prompt.</p>
+        <pre><code>### ~/.zshrc ###
+PROMPT="%F{blue}%~%f %B%(?.%F{green}.%F{red})%f%b "</code></pre>
+
+        <p><a href="https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html">This</a> is the list of all prompt expansions.</p>
+
+        <p>If this level of customization isn't enough, I suggest you check out <a href="https://starship.rs">starship</a>.</p>
+    </body>
+</html>

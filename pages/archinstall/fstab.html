@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
+        <title>Generate an Fstab</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../../css/style.css" rel="stylesheet">
     </head>
     <body>
         <a href="index.html">⇐ back</a>
-        <h1>Create an Fstab</h1>
-        <h2>Installing</h2>
-        <ul>
-            <li><code>genftsab</code> is installed by default in the Arch Linux live environment.</li>
-            <li>On other distros, it is available <a href="https://github.com/glacion/genfstab">here</a></li>
-        </ul>
+        <h1>Generate an Fstab</h1>
+        <p>Create an fstab file using <code>genfstab</code>.</p>
         <h2>Usage</h2>
         <p>Generate an <code>fstab</code> with <code>-U</code>, then the mount location. <code>-U</code> uses UUIDs to identify each mount point.</p>
         <pre><code>genfstab -U /mnt</code></pre>
         <h3>Labels</h3>
-        <p>If your partitions are labeled, you can use <code>-L</code> to use labels instead of UUIDs. see <a href=./fs.html>Why Labels?</a> for more information</p>
+        <p>If your partitions are labeled, you can use <code>-L</code> to use labels instead of UUIDs. see <a href="./fs.html#why_labels">Why Labels?</a> for more information</p>
         <pre><code>genfstab -L /mnt</code></pre>
+
+        <p>On other distros, <code>genfstab</code> is available <a href="https://github.com/glacion/genfstab">here</a>.</p> 
     </body>
 </html>
 

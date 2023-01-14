@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# doas
+alias su="gum confirm 'root?' && sudo -s || echo 'never mind'"
+
+# exa
+alias ls="exa -a1 --icons --group-directories-first"
+alias tree="exa -T"
+
+# cd
+alias cdtemp='cd $(mktemp -d)'
+mkcd() {
+	mkdir -pv "$@" && cd "$_" || exit
+}
+# alias mkdir='mkcd'
+
+# trash
+trash() {
+	case "$1" in
+		-*) mv $2 ~/.local/share/trash/ ;;
+		*) mv $1 ~/.local/share/trash/ ;;
+	esac
+}
+alias rm="trash"
+
+alias neofetch="pfetch"
+alias stopwatch='time cat'
+alias x='exit'
+alias curl_wget="curl -JLO "
+
+big() {
+    du -h $1 | awk '{print $1}'
+}
+
+man() {
+  /usr/bin/man $* | \
+    col -b | \
+    nvim -R -c 'set ft=man nomod nolist' -
+}
+
+alias vimwiki='nvim ~/vimwiki/index.wiki'
+
+add_alias() {
+    echo "$1" >> ~/.config/zsh/aliasrc
+}
