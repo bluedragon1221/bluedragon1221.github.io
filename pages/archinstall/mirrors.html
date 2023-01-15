@@ -5,16 +5,20 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../../css/style.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="../../css/hljs-theme.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
     </head>
     <body>
         <a href="index.html">⇐ back</a>
         <h1>Update Mirrors</h1>
-        <p>In Arch Linux, mirrors are not automatically changed based on your location. Instead, Arch users use <a href="https://wiki.archlinux.org/title/Reflector"><code>reflector</code></a> to update mirrors.</p>
+        <p>In Arch Linux, mirrors are not automatically changed based on your location. Instead, Arch users use <a href="https://wiki.archlinux.org/title/Reflector"><code class="language-bash">reflector</code></a> to update mirrors.</p>
         <h2>Backup</h2>
-        <p>Make a backup of the <code>mirrorlist</code> file before doing this, as it will overwrite the current one.</p>
-        <pre><code>cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak</code></pre>
+        <p>Make a backup of the <code class="language-bash">mirrorlist</code> file before doing this, as it will overwrite the current one.</p>
+        <pre><code class="language-bash">cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak</code></pre>
         <h2>Run reflector</h2>
-        <pre><code>reflector --protocol https \
+        <pre><code class="language-bash">reflector --protocol https \
 --latest 10 \
 --sort rate \
 --save /etc/pacman.d/mirrorlist</code></pre>
